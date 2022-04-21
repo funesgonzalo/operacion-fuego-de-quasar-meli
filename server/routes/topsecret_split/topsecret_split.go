@@ -103,26 +103,7 @@ func TopSecretSplit_Get(res http.ResponseWriter, req *http.Request) {
 	satoCache, foundSato := GetCache("sato")
 
 	if foundKenobi && foundSkywalker && foundSato {
-		// kenobi := services.Point{
-		// 	X: float64(models.KenobiX),
-		// 	Y: float64(models.KenobiY),
-		// }
-
-		// skywalker := services.Point{
-		// 	X: float64(models.SkywalkerX),
-		// 	Y: float64(models.SkywalkerY),
-		// }
-
-		// sato := services.Point{
-		// 	X: float64(models.SatoX),
-		// 	Y: float64(models.SatoY),
-		// }
-
-		// satelites := services.NewSatellites(kenobi, skywalker, sato)
-		// result := satelites.GetLocation(float64(kenobiCache.Distance), float64(skywalkerCache.Distance), float64(satoCache.Distance))
-
 		result := services.GetLocationService(kenobiCache.Distance, skywalkerCache.Distance, satoCache.Distance)
-
 		message := services.GetMessage(kenobiCache.Message, skywalkerCache.Message, satoCache.Message)
 
 		if message == "" || result.X == -1 || result.Y == -1 {
@@ -130,7 +111,7 @@ func TopSecretSplit_Get(res http.ResponseWriter, req *http.Request) {
 			res.WriteHeader(http.StatusNotFound)
 			res.Write(result)
 		} else {
-			result := []byte(fmt.Sprintf("{\"position\": {\"x\": %.2f,\"y\": %.2f},\"message\": \"%s\"}", result.X, result.Y, message))
+			result := []byte(fmt.Sprintf("{\"position\": {\"x\": %.2f,\"y\": %.2f},\"message\": \"%s\"}", float32(result.X), float32(result.Y), message))
 			res.Write(result)
 			res.WriteHeader(http.StatusOK)
 		}

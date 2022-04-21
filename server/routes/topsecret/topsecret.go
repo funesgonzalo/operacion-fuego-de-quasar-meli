@@ -12,23 +12,6 @@ import (
 	"strings"
 )
 
-// type Satelite struct {
-// 	Name     string   `json:"name"`
-// 	Distance float32  `json:"distance"`
-// 	Message  []string `json:"message"`
-// }
-
-// type Satelites struct {
-// 	Satelites []*Satelite `json:"satellites"`
-// }
-
-// func header(res http.ResponseWriter) {
-// 	res.Header().Set("Access-Control-Allow-Origin", "*")
-// 	res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-// 	(res).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-// 	res.Header().Set("Content-Type", "application/json")
-// }
-
 func TopSecretPost(res http.ResponseWriter, req *http.Request) {
 	// header(res)
 	utils.HeaderConfig(res)
@@ -69,9 +52,9 @@ func processRequest(bodySatelites models.Satelites) (float32, float32, string, b
 	var (
 		message           string  = ""
 		isValid           bool    = true
-		distanceKenobi    float64 = 0
-		distanceSkywalker float64 = 0
-		distanceSato      float64 = 0
+		distanceKenobi    float32 = 0
+		distanceSkywalker float32 = 0
+		distanceSato      float32 = 0
 	)
 
 	messages := make(map[string][]string)
@@ -79,35 +62,18 @@ func processRequest(bodySatelites models.Satelites) (float32, float32, string, b
 	for _, s := range bodySatelites.Satelites {
 		switch strings.ToLower(s.Name) {
 		case "kenobi":
-			distanceKenobi = float64(s.Distance)
+			distanceKenobi = s.Distance
 			messages["kenobi"] = s.Message
 		case "skywalker":
-			distanceSkywalker = float64(s.Distance)
+			distanceSkywalker = s.Distance
 			messages["skywalker"] = s.Message
 		case "sato":
-			distanceSato = float64(s.Distance)
+			distanceSato = s.Distance
 			messages["sato"] = s.Message
 		}
 	}
 
-	kenobi := services.Point{
-		X: float64(models.KenobiX),
-		Y: float64(models.KenobiY),
-	}
-
-	skywalker := services.Point{
-		X: float64(models.SkywalkerX),
-		Y: float64(models.SkywalkerY),
-	}
-
-	sato := services.Point{
-		X: float64(models.SatoX),
-		Y: float64(models.SatoY),
-	}
-
-	satelites := services.NewSatellites(kenobi, skywalker, sato)
-	result := satelites.GetLocation(distanceKenobi, distanceSkywalker, distanceSato)
-
+	result := services.GetLocationService(distanceKenobi, distanceSkywalker, distanceSato)
 	message = services.GetMessage(messages["kenobi"], messages["skywalker"], messages["sato"])
 
 	if message == "" || result.X == -1 || result.Y == -1 {

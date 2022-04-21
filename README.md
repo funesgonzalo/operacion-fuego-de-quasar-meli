@@ -10,6 +10,8 @@ Email: gonzalofunes123@gmail.com
 
 Para ejecutar localmente clonar el proyecto, tener instalado como mínimo la Golang 1.18. Abrir la carpeta y ejecutar desde la terminal  `go run ./main.go`. Por defecto escucha el puerto 8080
 
+La publicación del la API se realizó en [heroku](https://www.heroku.com/) 
+
 ## EndPoints
 ### Local
 - [POST] localhost:8080/topsecret

@@ -17,6 +17,12 @@ Para ejecutar localmente clonar el proyecto, tener instalado como mínimo la Gol
 - [GET] localhost:8080/topsecret_split
 - [GET] localhost:8080 - Dummy
 
+### Publicacion
+- [POST] https://fuego-de-quasar-meli-gonzalo-f.herokuapp.com//topsecret
+- [POST] https://fuego-de-quasar-meli-gonzalo-f.herokuapp.com/topsecret_split/{satellite_name}
+- [GET] https://fuego-de-quasar-meli-gonzalo-f.herokuapp.com//topsecret_split
+- [GET] https://fuego-de-quasar-meli-gonzalo-f.herokuapp.com/ - Dummy
+
 ## Dependencias
 - [github.com/bitly/go-simplejson v0.5.0](github.com/bitly/go-simplejson)
 - [github.com/gorilla/mux v1.8.0](github.com/gorilla/mux)

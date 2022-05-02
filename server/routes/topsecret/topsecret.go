@@ -13,7 +13,6 @@ import (
 )
 
 func TopSecretPost(res http.ResponseWriter, req *http.Request) {
-	// header(res)
 	utils.HeaderConfig(res)
 	var bodySatelites models.Satelites
 

@@ -23,18 +23,6 @@ func GetMessage(messages ...[]string) (msg string) {
 			}
 		}
 	}
-
-	// maxLen := len(resp) - 1
-	// for index, msg := range resp {
-	// 	if msg == "" {
-	// 		if index == maxLen {
-	// 			resp = append(resp[:index], resp[index:]...)
-	// 		} else {
-	// 			resp = append(resp[:index], resp[index+1:]...)
-	// 		}
-	// 	}
-	// }
-
 	return strings.Join(resp, " ")
 }
 
